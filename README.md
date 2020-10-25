@@ -7,6 +7,9 @@
   </p>
 </p>
 
+### Demo
+![Recipe Lookup Demo](./demo.gif)
+
 ### Built With
 * [React Native](https://reactnative.dev/)
 
