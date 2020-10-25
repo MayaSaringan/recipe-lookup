@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import React  from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import Food from "./src/Food";
+const initialState = {
+  foods: [],
+};
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_FOOD":
+      return { foods: [...state.foods, { name: action.name }] };
+    case "ADD_MULTIPLE_FOODS":
+      return { foods: [...action.list] };
+    case "ADD_FOOD_OBJ":
+      return { foods: [...state.foods, action.food] };
+  }
+  return state;
+};
+const store = createStore(reducer);
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      {/*ensures store is available throughout the app*/}
+      <Food />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
